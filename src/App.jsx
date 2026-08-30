@@ -38,6 +38,25 @@ const storage = {
   },
 };
 
+const storage = {
+  get: async (key) => {
+    try {
+      const v = localStorage.getItem(key);
+      return v !== null ? { key, value: v } : null;
+    } catch (e) {
+      return null;
+    }
+  },
+  set: async (key, value) => {
+    try {
+      localStorage.setItem(key, value);
+      return { key, value };
+    } catch (e) {
+      return null;
+    }
+  },
+};
+
 const DEFAULT_ITEMS = [
   { id: uid(), title: "資料をまとめる", status: "calendar", dueDate: todayStr(), time: "15:00", done: false, createdAt: todayStr() },
   { id: uid(), title: "本を返しに行くのを頼まれた件、返事待ち", status: "waiting", done: false, createdAt: addDays(todayStr(), -9) },
